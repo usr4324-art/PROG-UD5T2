@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import net.salesianoscuesta.Utils;
 import net.salesianoscuesta.Destino;
+import net.salesianoscuesta.Editar;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -39,11 +40,11 @@ public class App {
                     }
                     break;
 
-                case 1: // EDITAR (Opcional, para completar el CRUD)
-                    JOptionPane.showMessageDialog(null, "Función de editar en desarrollo...");
+                case 1: // EDITAR
+                    Editar.ejecutar(listaDestinos);
                     break;
 
-                case 2:
+                case 2: //MOSTRAR
                     if (listaDestinos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "La lista está vacía.");
                     } else {
