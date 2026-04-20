@@ -2,7 +2,7 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import net.salesianoscuesta.RipAdBaisorUtils;
+import net.salesianoscuesta.Utils;
 import net.salesianoscuesta.Destino;
 
 public class App {
@@ -22,18 +22,18 @@ public class App {
 
             switch (opcion) {
                 case 0: // AÑADIR
-                    String nom = RipAdBaisorUtils.solicitarTexto("Nombre del destino:");
+                    String nom = Utils.solicitarTexto("Nombre del destino:");
                     if (nom == null) break;
 
-                    String pais = RipAdBaisorUtils.solicitarTexto("País:");
+                    String pais = Utils.solicitarTexto("País:");
                     if (pais == null) break;
 
-                    String tipo = RipAdBaisorUtils.solicitarTexto("Tipo (Hotel/Playa...):");
+                    String tipo = Utils.solicitarTexto("Tipo (Hotel/Playa...):");
                     if (tipo == null) break;
 
-                    int puntos = RipAdBaisorUtils.solicitarEntero("Puntuación (1-5):");
+                    int puntos = Utils.solicitarEntero("Puntuación (1-5):");
 
-                    if (puntos != -1 && RipAdBaisorUtils.esPuntuacionValida(puntos)) {
+                    if (puntos != -1 && Utils.esPuntuacionValida(puntos)) {
                         listaDestinos.add(new Destino(nom, pais, tipo, puntos));
                         JOptionPane.showMessageDialog(null, "¡Destino guardado con éxito!");
                     }
@@ -57,7 +57,7 @@ public class App {
                     break;
 
                 case 3: // ELIMINAR
-                    String borrar = RipAdBaisorUtils.solicitarTexto("Nombre del destino a eliminar:");
+                    String borrar = Utils.solicitarTexto("Nombre del destino a eliminar:");
                     if (borrar != null) {
                         boolean ok = listaDestinos.removeIf(d -> d.getNombre().equalsIgnoreCase(borrar));
                         JOptionPane.showMessageDialog(null, ok ? "Eliminado" : "No encontrado");

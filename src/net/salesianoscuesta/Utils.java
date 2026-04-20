@@ -2,14 +2,7 @@ package net.salesianoscuesta;
 
 import javax.swing.JOptionPane;
 
-
-/**
-Clase: RipAdBaisorUtils
-Descripción: Clase con métodos estáticos para modularizar la entrada de datos.
-Finalidad: Centralizar validaciones y evitar repetir código 
- */
-public class RipAdBaisorUtils {
-
+public class Utils {
     public static String solicitarTexto(String mensaje) {
         String input = JOptionPane.showInputDialog(mensaje);
         if (input == null || input.trim().isEmpty()) {
