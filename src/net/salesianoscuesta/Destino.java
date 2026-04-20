@@ -1,3 +1,8 @@
+/*
+* Clase Destino: Representa un destino turístico con su nombre, país, tipo de alojamiento y puntuación.
+*
+*/
+
 package net.salesianoscuesta;
 
 public class Destino {

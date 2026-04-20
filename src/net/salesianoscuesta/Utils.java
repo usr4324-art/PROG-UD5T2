@@ -1,3 +1,7 @@
+/* 
+ * Clase Utils: Contiene métodos auxiliares para la entrada y validación de datos.
+ */
+
 package net.salesianoscuesta;
 
 import javax.swing.JOptionPane;
