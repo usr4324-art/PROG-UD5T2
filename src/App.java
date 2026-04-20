@@ -26,7 +26,7 @@ public class App {
                     String nom = JOptionPane.showInputDialog("Nombre del destino:");
                     String pais = JOptionPane.showInputDialog("País:");
                     String tipo = JOptionPane.showInputDialog("Tipo (Hotel/Playa...):");
-                    
+
                     try {
                         int puntos = Integer.parseInt(JOptionPane.showInputDialog("Puntuación (1-5):"));
                         listaDestinos.add(new Destino(nom, pais, tipo, puntos));
@@ -36,8 +36,8 @@ public class App {
                     }
                     break;
 
-                case 2: 
-                    
+                case 2:
+
                     Collections.sort(listaDestinos, (d1, d2) -> d2.getPuntuacion() - d1.getPuntuacion());
 
                     String listado = "--- RANKING DE DESTINOS ---\n";
@@ -47,7 +47,23 @@ public class App {
                     JOptionPane.showMessageDialog(null, listado);
                     break;
 
-                case 4: 
+                case 3:
+                    if (listaDestinos.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "No hay destinos para eliminar.");
+                    } else {
+                        String nombreABorrar = JOptionPane.showInputDialog("Escribe el nombre del destino a eliminar:");
+
+                        boolean encontrado = listaDestinos.removeIf(d -> d.getNombre().equalsIgnoreCase(nombreABorrar));
+
+                        if (encontrado) {
+                            JOptionPane.showMessageDialog(null, "¡Destino eliminado con éxito!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se encontró ningún destino con ese nombre.");
+                        }
+                    }
+                    break;
+
+                case 4:
                     JOptionPane.showMessageDialog(null, "Cerrando RipAdbaisor. ¡Buen viaje!");
                     break;
             }
