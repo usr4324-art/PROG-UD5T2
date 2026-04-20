@@ -43,7 +43,7 @@ public class App {
                     JOptionPane.showMessageDialog(null, "Función de editar en desarrollo...");
                     break;
 
-                case 2: // MOSTRAR
+                case 2:
                     if (listaDestinos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "La lista está vacía.");
                     } else {
