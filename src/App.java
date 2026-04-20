@@ -1,10 +1,9 @@
 import javax.swing.JOptionPane;
-
-import net.salesianoscuesta.Destino;
-
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+
+import net.salesianoscuesta.RipAdBaisorUtils;
+import net.salesianoscuesta.Destino;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -23,52 +22,52 @@ public class App {
 
             switch (opcion) {
                 case 0: // AÑADIR
-                    String nom = JOptionPane.showInputDialog("Nombre del destino:");
-                    String pais = JOptionPane.showInputDialog("País:");
-                    String tipo = JOptionPane.showInputDialog("Tipo (Hotel/Playa...):");
+                    String nom = RipAdBaisorUtils.solicitarTexto("Nombre del destino:");
+                    if (nom == null) break;
 
-                    try {
-                        int puntos = Integer.parseInt(JOptionPane.showInputDialog("Puntuación (1-5):"));
+                    String pais = RipAdBaisorUtils.solicitarTexto("País:");
+                    if (pais == null) break;
+
+                    String tipo = RipAdBaisorUtils.solicitarTexto("Tipo (Hotel/Playa...):");
+                    if (tipo == null) break;
+
+                    int puntos = RipAdBaisorUtils.solicitarEntero("Puntuación (1-5):");
+
+                    if (puntos != -1 && RipAdBaisorUtils.esPuntuacionValida(puntos)) {
                         listaDestinos.add(new Destino(nom, pais, tipo, puntos));
-                        JOptionPane.showMessageDialog(null, "¡Destino guardado!");
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(null, "Error: ¡Debes poner un número!");
+                        JOptionPane.showMessageDialog(null, "¡Destino guardado con éxito!");
                     }
                     break;
 
-                case 2:
-
-                    Collections.sort(listaDestinos, (d1, d2) -> d2.getPuntuacion() - d1.getPuntuacion());
-
-                    String listado = "--- RANKING DE DESTINOS ---\n";
-                    for (Destino d : listaDestinos) {
-                        listado += d.toString() + "\n";
-                    }
-                    JOptionPane.showMessageDialog(null, listado);
+                case 1: // EDITAR (Opcional, para completar el CRUD)
+                    JOptionPane.showMessageDialog(null, "Función de editar en desarrollo...");
                     break;
 
-                case 3:
+                case 2: // MOSTRAR
                     if (listaDestinos.isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "No hay destinos para eliminar.");
+                        JOptionPane.showMessageDialog(null, "La lista está vacía.");
                     } else {
-                        String nombreABorrar = JOptionPane.showInputDialog("Escribe el nombre del destino a eliminar:");
-
-                        boolean encontrado = listaDestinos.removeIf(d -> d.getNombre().equalsIgnoreCase(nombreABorrar));
-
-                        if (encontrado) {
-                            JOptionPane.showMessageDialog(null, "¡Destino eliminado con éxito!");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "No se encontró ningún destino con ese nombre.");
+                        Collections.sort(listaDestinos, (d1, d2) -> d2.getPuntuacion() - d1.getPuntuacion());
+                        String listado = "--- RANKING DE DESTINOS ---\n";
+                        for (Destino d : listaDestinos) {
+                            listado += d.toString() + "\n";
                         }
+                        JOptionPane.showMessageDialog(null, listado);
                     }
                     break;
 
-                case 4:
-                    JOptionPane.showMessageDialog(null, "Cerrando RipAdbaisor. ¡Buen viaje!");
+                case 3: // ELIMINAR
+                    String borrar = RipAdBaisorUtils.solicitarTexto("Nombre del destino a eliminar:");
+                    if (borrar != null) {
+                        boolean ok = listaDestinos.removeIf(d -> d.getNombre().equalsIgnoreCase(borrar));
+                        JOptionPane.showMessageDialog(null, ok ? "Eliminado" : "No encontrado");
+                    }
+                    break;
+
+                case 4: // SALIR
+                    JOptionPane.showMessageDialog(null, "Cerrando RipAdbaisor.");
                     break;
             }
-
         } while (opcion != 4 && opcion != -1);
     }
-
 }
